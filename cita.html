@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cita Previa — Clínica Veterinaria Por Ellos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+
+    /* ── TOKENS ── */
+    :root {
+      --white:    #FAFAF8;
+      --ink:      #0D1F3C;
+      --sage:     #4A6741;
+      --sage-lt:  #EEF2EC;
+      --gold:     #C9A96E;
+      --gold-lt:  #F5EFE4;
+      --stone:    #6B7280;
+      --rule:     #E2D9CC;
+      --ff-head:  'Cormorant Garamond', Georgia, serif;
+      --ff-body:  'DM Sans', system-ui, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--ff-body);
+      background: var(--white);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── PAGE SWITCHING ── */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* ════════════════════════════════
+       HEADER
+    ════════════════════════════════ */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: var(--white);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    /* signature gold line */
+    header::before {
+      content: '';
+      display: block;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold) 0%, #e8c98a 50%, var(--gold) 100%);
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .logo-eyebrow {
+      font-family: var(--ff-body);
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .logo-name {
+      font-family: var(--ff-head);
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: .01em;
+      line-height: 1;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    nav a.nav-link {
+      font-family: var(--ff-body);
+      font-size: .82rem;
+      font-weight: 500;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      position: relative;
+      padding-bottom: 2px;
+      cursor: pointer;
+    }
+    nav a.nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 1px;
+      background: var(--gold);
+      transition: width .3s;
+    }
+    nav a.nav-link:hover::after { width: 100%; }
+
+    .nav-divider {
+      width: 1px;
+      height: 20px;
+      background: var(--rule);
+    }
+
+    .social-row {
+      display: flex;
+      gap: 12px;
+    }
+    .social-row a {
+      color: var(--stone);
+      font-size: .9rem;
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .social-row a:hover { color: var(--gold); }
+
+    /* ════════════════════════════════
+       HERO
+    ════════════════════════════════ */
+    #inicio {
+      background: var(--ink);
+      min-height: 88vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Subtle texture */
+    #inicio::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle at 70% 50%, rgba(201,169,110,.07) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-text {
+      padding: 80px 64px 80px 80px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--ff-body);
+      font-size: .75rem;
+      font-weight: 500;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      width: 32px;
+      height: 1px;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .hero-title {
+      font-family: var(--ff-head);
+      font-size: clamp(2.8rem, 4.5vw, 4.2rem);
+      font-weight: 500;
+      color: var(--white);
+      line-height: 1.08;
+      margin-bottom: 28px;
+      letter-spacing: -.01em;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-body {
+      font-size: .97rem;
+      line-height: 1.8;
+      color: rgba(250,250,248,.65);
+      max-width: 440px;
+      margin-bottom: 44px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold);
+      color: var(--ink);
+      font-family: var(--ff-body);
+      font-size: .8rem;
+      font-weight: 500;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      padding: 14px 30px;
+      border-radius: 2px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background .2s, transform .15s;
+    }
+    .btn-primary:hover { background: #d4b57a; transform: translateY(-1px); }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--white);
+      font-family: var(--ff-body);
+      font-size: .8rem;
+      font-weight: 500;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      padding: 13px 30px;
+      border-radius: 2px;
+      text-decoration: none;
+      border: 1px solid rgba(250,250,248,.35);
+      cursor: pointer;
+      transition: border-color .2s, background .2s;
+    }
+    .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,.05); }
+
+    /* Hero visual side */
+    .hero-visual {
+      height: 100%;
+      min-height: 88vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Large decorative dog illustration */
+    .hero-visual svg {
+      width: min(480px, 90%);
+      opacity: .18;
+      position: absolute;
+    }
+
+    .hero-stat-card {
+      position: relative;
+      z-index: 2;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(201,169,110,.25);
+      border-radius: 4px;
+      padding: 36px 40px;
+      text-align: center;
+      backdrop-filter: blur(8px);
+    }
+
+    .hero-stat-card .stat-num {
+      font-family: var(--ff-head);
+      font-size: 3.2rem;
+      font-weight: 500;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .hero-stat-card .stat-label {
+      font-size: .75rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(250,250,248,.55);
+    }
+    .hero-stat-divider {
+      width: 1px;
+      height: 32px;
+      background: rgba(201,169,110,.3);
+      margin: 20px auto;
+    }
+
+    /* ════════════════════════════════
+       SECTION SCAFFOLDING
+    ════════════════════════════════ */
+    .section {
+      padding: 96px 40px;
+    }
+    .section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: .72rem;
+      font-weight: 500;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      max-width: 40px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .section-title {
+      font-family: var(--ff-head);
+      font-size: clamp(2rem, 3vw, 2.8rem);
+      font-weight: 500;
+      color: var(--ink);
+      line-height: 1.12;
+      margin-bottom: 56px;
+    }
+
+    /* ════════════════════════════════
+       SERVICIOS
+    ════════════════════════════════ */
+    #servicios { background: var(--white); }
+
+    .services-intro {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: end;
+      margin-bottom: 72px;
+    }
+
+    .services-intro p {
+      font-size: .97rem;
+      line-height: 1.8;
+      color: var(--stone);
+      padding-top: 16px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+    }
+
+    .service-card {
+      background: var(--white);
+      padding: 0;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .service-card__img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      display: block;
+      transition: transform .5s ease;
+      background: var(--sage-lt);
+    }
+    .service-card:hover .service-card__img { transform: scale(1.03); }
+    .service-card__placeholder {
+      background: linear-gradient(135deg, var(--sage-lt) 0%, #dde8d8 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .service-card__placeholder::after {
+      content: "Foto próximamente";
+      font-size: .75rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--stone);
+    }
+
+    .service-card__body {
+      padding: 28px 28px 32px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .service-card__tag {
+      font-size: .68rem;
+      font-weight: 500;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+
+    .service-card__title {
+      font-family: var(--ff-head);
+      font-size: 1.35rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+
+    .service-card__desc {
+      font-size: .88rem;
+      line-height: 1.7;
+      color: var(--stone);
+      flex: 1;
+      margin-bottom: 20px;
+    }
+
+    .service-card__link {
+      font-size: .75rem;
+      font-weight: 500;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      border: none;
+      background: none;
+      padding: 0;
+      font-family: var(--ff-body);
+      transition: color .2s;
+    }
+    .service-card__link:hover { color: var(--gold); }
+    .service-card__link i { font-size: .65rem; transition: transform .2s; }
+    .service-card__link:hover i { transform: translateX(3px); }
+
+    /* Second row: 2 cards centered */
+    .services-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+      border-top: none;
+      max-width: calc(66.66% + 1px);
+    }
+
+    /* ════════════════════════════════
+       EQUIPO
+    ════════════════════════════════ */
+    #equipo { background: var(--sage-lt); }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 28px;
+    }
+
+    .team-card {
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .team-card__portrait {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+      border-radius: 50%;
+      filter: grayscale(15%);
+      transition: filter .4s, transform .4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      cursor: zoom-in;
+      background: #c8d5c4;
+      margin-bottom: 20px;
+    }
+    .team-card:hover .team-card__portrait { filter: grayscale(0%); }
+    .team-card__portrait.zoomed, .team-card__portrait:active {
+      transform: scale(1.08);
+      filter: grayscale(0%);
+      transition: filter .2s, transform .2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      cursor: zoom-in;
+    }
+
+    .team-card__name {
+      font-family: var(--ff-head);
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+
+    .team-card__role {
+      font-size: .78rem;
+      font-weight: 400;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--stone);
+    }
+
+    /* ════════════════════════════════
+       JUNTA CyL
+    ════════════════════════════════ */
+    #junta {
+      background: var(--white);
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .junta-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 72px 40px;
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .junta-text h2 {
+      font-family: var(--ff-head);
+      font-size: 1.8rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 20px;
+      line-height: 1.15;
+    }
+
+    .junta-text p {
+      font-size: .9rem;
+      line-height: 1.8;
+      color: var(--stone);
+      margin-bottom: 20px;
+    }
+
+    .junta-meta {
+      font-size: .82rem;
+      color: var(--stone);
+      line-height: 1.9;
+      border-left: 2px solid var(--gold);
+      padding-left: 16px;
+    }
+
+    .junta-logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+
+    .junta-logos img {
+      height: 52px;
+      object-fit: contain;
+      filter: grayscale(30%);
+      transition: filter .3s;
+    }
+    .junta-logos img:hover { filter: grayscale(0%); }
+
+    .junta-logos-divider {
+      width: 1px;
+      height: 52px;
+      background: var(--rule);
+    }
+
+    /* ════════════════════════════════
+       FOOTER
+    ════════════════════════════════ */
+    footer { background: var(--ink); }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-contact {
+      padding: 72px 64px 72px 40px;
+      border-right: 1px solid rgba(255,255,255,.07);
+    }
+
+    .footer-logo {
+      font-family: var(--ff-head);
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .footer-logo-sub {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 40px;
+      display: block;
+    }
+
+    .footer-contact-items {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .footer-contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .footer-contact-item i {
+      color: var(--gold);
+      font-size: .9rem;
+      margin-top: 2px;
+      width: 16px;
+      flex-shrink: 0;
+    }
+
+    .footer-contact-item a,
+    .footer-contact-item span {
+      font-size: .88rem;
+      color: rgba(250,250,248,.65);
+      text-decoration: none;
+      line-height: 1.5;
+      transition: color .2s;
+    }
+    .footer-contact-item a:hover { color: var(--gold); }
+
+    .footer-social {
+      display: flex;
+      gap: 10px;
+      margin-top: 36px;
+    }
+    .footer-social a {
+      width: 36px;
+      height: 36px;
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(250,250,248,.6);
+      font-size: .85rem;
+      text-decoration: none;
+      transition: border-color .2s, color .2s;
+    }
+    .footer-social a:hover { border-color: var(--gold); color: var(--gold); }
+
+    .footer-map iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 360px;
+      border: none;
+      display: block;
+      filter: grayscale(40%) contrast(1.05);
+      transition: filter .4s, transform .4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      cursor: zoom-in;
+    }
+    .footer-map:hover iframe { filter: grayscale(0%); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.07);
+      padding: 20px 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-bottom p {
+      font-size: .78rem;
+      color: rgba(250,250,248,.35);
+      letter-spacing: .04em;
+    }
+
+    /* ════════════════════════════════
+       CITA PREVIA
+    ════════════════════════════════ */
+    #cita-section {
+      background: var(--sage-lt);
+      min-height: calc(100vh - 75px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 40px;
+    }
+
+    .cita-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 0;
+      max-width: 960px;
+      width: 100%;
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-radius: 2px;
+      overflow: hidden;
+      box-shadow: 0 24px 80px rgba(13,31,60,.1);
+    }
+
+    .cita-info {
+      background: var(--ink);
+      padding: 56px 44px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .cita-info__top h2 {
+      font-family: var(--ff-head);
+      font-size: 2rem;
+      font-weight: 500;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .cita-info__top p {
+      font-size: .88rem;
+      line-height: 1.75;
+      color: rgba(250,250,248,.6);
+      margin-bottom: 40px;
+    }
+
+    .cita-contact-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .cita-contact-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: .85rem;
+      color: rgba(250,250,248,.65);
+    }
+    .cita-contact-list i { color: var(--gold); width: 14px; }
+
+    .cita-info__bottom {
+      padding-top: 40px;
+      border-top: 1px solid rgba(255,255,255,.08);
+    }
+    .cita-info__bottom p {
+      font-size: .72rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .cita-info__bottom .social-row a { color: rgba(250,250,248,.45); }
+    .cita-info__bottom .social-row a:hover { color: var(--gold); }
+
+    .cita-form-side {
+      padding: 56px 44px;
+    }
+
+    .cita-form-side h3 {
+      font-family: var(--ff-head);
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 32px;
+    }
+
+    .form-group {
+      margin-bottom: 22px;
+    }
+    .form-group label {
+      display: block;
+      font-size: .72rem;
+      font-weight: 500;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-bottom: 8px;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 0;
+      border: none;
+      border-bottom: 1.5px solid var(--rule);
+      border-radius: 0;
+      background: transparent;
+      font-family: var(--ff-body);
+      font-size: .95rem;
+      color: var(--ink);
+      outline: none;
+      transition: border-color .25s;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus { border-bottom-color: var(--gold); }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: #c5c5c5; font-size: .9rem; }
+    .form-group textarea { height: 90px; resize: none; }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .btn-cita-submit {
+      width: 100%;
+      margin-top: 32px;
+      padding: 14px;
+      background: var(--ink);
+      color: var(--white);
+      font-family: var(--ff-body);
+      font-size: .78rem;
+      font-weight: 500;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .btn-cita-submit:hover { background: var(--sage); }
+
+    /* ── RESPONSIVE ── */
+
+    /* Tablet grande / portátil pequeño */
+    @media (max-width: 1100px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .team-grid { grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    }
+
+    /* Tablet */
+    @media (max-width: 1024px) {
+      #inicio { grid-template-columns: 1fr; min-height: auto; }
+      .hero-visual { display: none; }
+      .hero-text { padding: 72px 48px; }
+      .services-intro { grid-template-columns: 1fr; gap: 16px; }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .services-grid-2 { max-width: 100%; grid-template-columns: repeat(2, 1fr); }
+      .team-grid { grid-template-columns: repeat(2, 1fr); gap: 28px; }
+      .cita-wrapper { grid-template-columns: 1fr; }
+      .cita-info { padding: 40px 36px; }
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-contact { border-right: none; border-bottom: 1px solid rgba(255,255,255,.07); padding: 48px 40px; }
+      .footer-map iframe { min-height: 300px; }
+      .junta-inner { grid-template-columns: 1fr; gap: 36px; padding: 56px 40px; }
+      .junta-logos { justify-content: flex-start; }
+    }
+
+    /* Móvil grande */
+    @media (max-width: 768px) {
+      /* Header */
+      .header-inner { padding: 0 20px; height: 60px; }
+      .logo-eyebrow { display: none; }
+      .logo-name { font-size: 1rem; }
+      nav { gap: 14px; }
+      nav a.nav-link { font-size: .72rem; letter-spacing: .05em; }
+      .nav-divider { display: none; }
+
+      /* Hero */
+      .hero-text { padding: 52px 24px 60px; }
+      .hero-title { font-size: 2rem; }
+      .hero-body { font-size: .92rem; margin-bottom: 32px; }
+      .hero-actions { flex-direction: column; gap: 12px; }
+      .hero-actions a { text-align: center; justify-content: center; width: 100%; }
+
+      /* Secciones */
+      .section { padding: 56px 20px; }
+      .section-title { font-size: 1.8rem; margin-bottom: 32px; }
+      .services-intro p { display: none; }
+      .services-grid { grid-template-columns: 1fr; gap: 2px; }
+      .services-grid-2 { grid-template-columns: 1fr; border-top: 2px solid var(--rule); }
+      .service-card__img { height: 220px; }
+      .service-card__body { padding: 22px 20px 26px; }
+
+      /* Equipo */
+      .team-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+      .team-card__portrait { margin-bottom: 14px; }
+
+      /* Junta */
+      .junta-inner { padding: 44px 20px; gap: 28px; }
+      .junta-text h2 { font-size: 1.4rem; }
+      .junta-logos { gap: 16px; flex-wrap: wrap; }
+      .junta-logos img { height: 72px; }
+      .junta-logos-divider { height: 40px; }
+
+      /* Footer */
+      .footer-contact { padding: 44px 24px; }
+      .footer-map iframe { min-height: 240px; }
+      .footer-bottom { flex-direction: column; gap: 6px; text-align: center; padding: 18px 20px; }
+
+      /* Cita */
+      #cita-section { padding: 40px 16px; }
+      .cita-info { padding: 36px 28px; }
+      .cita-info__top h2 { font-size: 1.6rem; }
+      .cita-form-side { padding: 36px 28px; }
+      .form-row { grid-template-columns: 1fr; gap: 0; }
+      .btn-cita-submit { font-size: .75rem; }
+    }
+
+    /* Móvil pequeño */
+    @media (max-width: 480px) {
+      /* Header */
+      .header-inner { padding: 0 14px; }
+      .logo-name { font-size: .95rem; }
+      nav { gap: 10px; }
+      nav a.nav-link { font-size: .68rem; }
+      .social-row { display: none; }
+
+      /* Hero */
+      .hero-text { padding: 44px 18px 52px; }
+      .hero-title { font-size: 1.7rem; line-height: 1.12; }
+      .hero-eyebrow { font-size: .68rem; }
+      .btn-primary, .btn-outline { font-size: .74rem; padding: 12px 20px; }
+
+      /* Servicios */
+      .service-card__title { font-size: 1.2rem; }
+      .service-card__desc { font-size: .84rem; }
+
+      /* Equipo */
+      .team-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+      .team-card__name { font-size: .95rem; }
+      .team-card__role { font-size: .7rem; }
+
+      /* Junta */
+      .junta-logos img { height: 56px; }
+      .junta-logos-divider { display: none; }
+
+      /* Footer */
+      .footer-logo { font-size: 1.2rem; }
+      .footer-contact-item a,
+      .footer-contact-item span { font-size: .82rem; }
+
+      /* Cita */
+      .cita-info { padding: 28px 20px; }
+      .cita-form-side { padding: 28px 20px; }
+      .cita-info__top h2 { font-size: 1.4rem; }
+    }
+
+    /* Móvil muy pequeño */
+    @media (max-width: 360px) {
+      .header-inner { padding: 0 10px; }
+      .logo-name { font-size: .85rem; }
+      nav a.nav-link { font-size: .62rem; }
+      .hero-title { font-size: 1.5rem; }
+      .team-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    .domicilio-carousel { position: relative; }
+    .domicilio-slide { display: none; }
+    .domicilio-slide.active-slide { display: block; }
+    .carousel-dots {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 6px;
+    }
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.5);
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .dot.active-dot { background: #fff; }
+  
+  /* Asegurar que page-cita es visible */
+  #page-cita { display: block !important; }
+  .page { display: block !important; }
+  </style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <div class="logo-wrap" onclick="showPage('home')">
+      <span class="logo-eyebrow">Clínica Veterinaria</span>
+      <span class="logo-name">Por Ellos</span>
+    </div>
+    <nav>
+      <a class="nav-link" onclick="showPage('home', 'servicios')">Servicios</a>
+      <a class="nav-link" onclick="showPage('home', 'equipo')">Equipo</a>
+      <a class="nav-link" onclick="showPage('cita')">Cita Previa</a>
+      <div class="nav-divider"></div>
+      <div class="social-row">
+        <a href="https://www.facebook.com/people/Cl%C3%ADnica-Veterinaria-Por-ellos/61561717139515/" target="_blank" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+        <a href="https://www.instagram.com/cvporellos/" target="_blank" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<section id="cita-section">
+    <div class="cita-wrapper reveal">
+
+      <!-- Panel izquierdo info -->
+      <div class="cita-info">
+        <div class="cita-info__top">
+          <h2>Solicita tu cita previa</h2>
+          <p>Rellena el formulario y nos pondremos en contacto contigo a la mayor brevedad. También puedes llamarnos o escribirnos por WhatsApp.</p>
+          <ul class="cita-contact-list">
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.61 4.4 2 2 0 0 1 3.6 2.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.16 6.16l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 17z"/></svg> +34 920 094 517</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.12.554 4.107 1.523 5.832L.057 23.446a.5.5 0 0 0 .497.554h.046l5.765-1.512A11.948 11.948 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.006-1.371l-.359-.214-3.722.976.993-3.625-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg> +34 623 572 928</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> citascvporellos@gmail.com</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> C. José Zorrilla, nº2 · Arenas de San Pedro</li>
+          </ul>
+        </div>
+        <div class="cita-info__bottom">
+          <p>Síguenos</p>
+          <div class="social-row">
+            <a href="https://www.facebook.com/people/Cl%C3%ADnica-Veterinaria-Por-ellos/61561717139515/" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+            <a href="https://www.instagram.com/cvporellos/" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel derecho formulario -->
+      <div class="cita-form-side">
+        <h3>Datos de la solicitud</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="nombre">Tu nombre</label>
+            <input type="text" id="nombre" placeholder="María García" />
+          </div>
+          <div class="form-group">
+            <label for="mascota">Nombre de la mascota</label>
+            <input type="text" id="mascota" placeholder="Luna" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="telefono">Teléfono</label>
+            <input type="tel" id="telefono" placeholder="600 000 000" />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="correo@ejemplo.com" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="tipo">¿En qué podemos ayudarte?</label>
+          <textarea id="tipo" placeholder="Cuéntanos el motivo de la visita…"></textarea>
+        </div>
+        <button class="btn-cita-submit" onclick="enviarCita()">Enviar solicitud</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- JUNTA CyL (repetido en página cita) -->
+  <div id="junta" style="border-top:1px solid var(--rule); border-bottom:1px solid var(--rule);">
+    <div class="junta-inner">
+      <div class="junta-text">
+
+        <h2>Aquí invierte la Junta de Castilla y León</h2>
+        <p>Nuestra empresa ha iniciado su actividad gracias al apoyo financiero de la Junta de Castilla y León y del Instituto para la Competitividad Empresarial de Castilla y León (ICECYL).</p>
+        <div class="junta-meta">
+          Proyecto: Clínica veterinaria por ellos<br>
+          Código de expediente: 01/23/AV/0011<br>
+          Plazo de ejecución: 31/12/2025
+        </div>
+      </div>
+      <div class="junta-logos">
+        <img src="junta_logos.png" alt="Nos Impulsa · ICECyL · Junta de Castilla y León" style="height:110px; object-fit:contain;" />
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-contact">
+        <p class="footer-logo">Por Ellos</p>
+        <span class="footer-logo-sub">Clínica Veterinaria</span>
+        <div class="footer-contact-items">
+          <div class="footer-contact-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.61 4.4 2 2 0 0 1 3.6 2.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.16 6.16l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 17z"/></svg><a href="tel:+34920094517">Teléfono Clínica: +34 920 094 517</a></div>
+          <div class="footer-contact-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.12.554 4.107 1.523 5.832L.057 23.446a.5.5 0 0 0 .497.554h.046l5.765-1.512A11.948 11.948 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.006-1.371l-.359-.214-3.722.976.993-3.625-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg><a href="https://wa.me/34623572928">WhatsApp Clínica: +34 623 572 928</a></div>
+          <div class="footer-contact-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><a href="mailto:citascvporellos@gmail.com">Email: citascvporellos@gmail.com</a></div>
+          <div class="footer-contact-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><a href="https://maps.google.com/?q=C.+José+Zorrilla,+2,+Arenas+de+San+Pedro" target="_blank">Dirección: C. José Zorrilla, nº2, Arenas de San Pedro, Ávila</a></div>
+        </div>
+        <div class="footer-social">
+          <a href="https://www.facebook.com/people/Cl%C3%ADnica-Veterinaria-Por-ellos/61561717139515/" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="https://www.instagram.com/cvporellos/" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-map">
+        <iframe title="Ubicación" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2994.5!2d-5.0885364!3d40.2103894!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd3f8b907a6558a3%3A0xd68ea6df777ef520!2sCl%C3%ADnica%20Veterinaria%20Por%20ellos!5e0!3m2!1ses!2ses!4v1700000000000" allowfullscreen loading="lazy"></iframe>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Por Ellos. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+
+
+
+
+<script>
+  async function enviarCita() {
+    const nombre   = document.getElementById('nombre').value.trim();
+    const mascota  = document.getElementById('mascota').value.trim();
+    const telefono = document.getElementById('telefono').value.trim();
+    const email    = document.getElementById('email').value.trim();
+    const tipo     = document.getElementById('tipo').value.trim();
+
+    if (!nombre || !mascota || !telefono) {
+      alert('Por favor, rellena al menos tu nombre, el de tu mascota y el teléfono.');
+      return;
+    }
+
+    const btn = document.querySelector('.btn-cita-submit');
+    btn.textContent = 'Enviando...';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: '1df640a6-7992-4931-a2ed-dfcdff22c4ad',
+          subject: 'Nueva solicitud de cita previa — ' + nombre,
+          from_name: 'Web Clínica Por Ellos',
+          name: nombre,
+          NombreMascota: mascota,
+          Telefono: telefono,
+          Email: email || 'No indicado',
+          Motivo: tipo || 'No indicado'
+        })
+      });
+      const data = await res.json();
+      if (data.success) {
+        btn.textContent = '¡Solicitud enviada!';
+        btn.style.background = 'var(--sage)';
+        document.getElementById('nombre').value = '';
+        document.getElementById('mascota').value = '';
+        document.getElementById('telefono').value = '';
+        document.getElementById('email').value = '';
+        document.getElementById('tipo').value = '';
+        setTimeout(() => {
+          btn.textContent = 'Enviar solicitud';
+          btn.style.background = '';
+          btn.disabled = false;
+        }, 4000);
+      } else {
+        throw new Error('Error');
+      }
+    } catch(e) {
+      alert('Ha ocurrido un error. Por favor llámanos al 920 094 517.');
+      btn.textContent = 'Enviar solicitud';
+      btn.disabled = false;
+    }
+  }
+</script>
+</body>
+</html>
