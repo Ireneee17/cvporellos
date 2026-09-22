@@ -962,7 +962,22 @@
       .team-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
     }
 
-    /* ── SCROLL REVEAL ── */
+  
+  function abrirCita() {
+    document.getElementById('modal-cita').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    window.scrollTo(0, 0);
+  }
+  function cerrarCita() {
+    document.getElementById('modal-cita').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+  // Cerrar con Escape
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') cerrarCita();
+  });
+
+  /* ── SCROLL REVEAL ── */
     .reveal {
       opacity: 0;
       transform: translateY(24px);
@@ -1006,14 +1021,14 @@
 ══════════════════════════════════════ -->
 <header>
   <div class="header-inner">
-    <div class="logo-wrap" href='index.html'>
+    <div class="logo-wrap" onclick="showPage('home')">
       <span class="logo-eyebrow">Clínica Veterinaria</span>
       <span class="logo-name">Por Ellos</span>
     </div>
     <nav>
-      <a class="nav-link" href='index.html#servicios'>Servicios</a>
-      <a class="nav-link" href='index.html#equipo'>Equipo</a>
-      <a class="nav-link" href='cita.html'>Cita Previa</a>
+      <a class="nav-link" onclick="showPage('home', 'servicios')">Servicios</a>
+      <a class="nav-link" onclick="showPage('home', 'equipo')">Equipo</a>
+      <a class="nav-link" onclick="showPage('cita')">Cita Previa</a>
       <div class="nav-divider"></div>
       <div class="social-row">
         <a href="https://www.facebook.com/people/Cl%C3%ADnica-Veterinaria-Por-ellos/61561717139515/" target="_blank" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
@@ -1036,7 +1051,7 @@
       <h1 class="hero-title">El bienestar de tu<br>mascota es nuestra<br><em>misión</em></h1>
       <p class="hero-body">Bienvenidos a Clínica Veterinaria Por Ellos, donde el bienestar de tu mascota es nuestra misión. Cada mascota que atendemos es tratada con la dedicación y el cariño que se merece. Reserva tu cita aquí y confía en nuestro equipo para mantener a tu mascota sana y feliz. Tu tranquilidad es nuestra prioridad.</p>
       <div class="hero-actions">
-        <a class="btn-primary" href='cita.html'><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Pedir cita online</a>
+        <a class="btn-primary" onclick="showPage('cita')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Pedir cita online</a>
         <a href="tel:+34920094517" class="btn-outline"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.61 4.4 2 2 0 0 1 3.6 2.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.16 6.16l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 17z"/></svg> 920 094 517</a>
       </div>
     </div>
@@ -1066,7 +1081,7 @@
             <span class="service-card__tag">🐶 Medicina general</span>
             <h3 class="service-card__title">Consulta Canina</h3>
             <p class="service-card__desc">Consultas generales y especializadas para el cuidado integral de tu mascota.</p>
-            <a class="service-card__link" href='cita.html'>Reservar cita →</a>
+            <a class="service-card__link" onclick="showPage('cita')">Reservar cita →</a>
           </div>
         </div>
         <div class="service-card">
@@ -1075,7 +1090,7 @@
             <span class="service-card__tag">🐱 Medicina felina</span>
             <h3 class="service-card__title">Consulta Felina</h3>
             <p class="service-card__desc">Consulta exclusiva y adaptada para gatos, con un entorno tranquilo y libre de estrés.</p>
-            <a class="service-card__link" href='cita.html'>Reservar cita →</a>
+            <a class="service-card__link" onclick="showPage('cita')">Reservar cita →</a>
           </div>
         </div>
         <div class="service-card">
@@ -1084,7 +1099,7 @@
             <span class="service-card__tag">Prevención</span>
             <h3 class="service-card__title">Vacunación</h3>
             <p class="service-card__desc">Programas de prevención y vacunas para mantener a tu mascota sana y protegida.</p>
-            <a class="service-card__link" href='cita.html'>Reservar cita →</a>
+            <a class="service-card__link" onclick="showPage('cita')">Reservar cita →</a>
           </div>
         </div>
         <div class="service-card">
@@ -1092,7 +1107,7 @@
           <div class="service-card__body">
             <h3 class="service-card__title">Cirugía</h3>
             <p class="service-card__desc">Cirugías con equipamiento de última generación — estación de anestesia Mindray Veta 5, sellador vascular Ethicon, electrobisturí y unidad de limpieza dental — con terapia de cicatrización Phovia para que tu mascota esté siempre en las mejores manos. Contamos además con prequirófano para una preparación y recuperación tranquila y supervisada.</p>
-            <a class="service-card__link" href='cita.html'>Reservar cita →</a>
+            <a class="service-card__link" onclick="showPage('cita')">Reservar cita →</a>
           </div>
         </div>
       </div>
@@ -1111,7 +1126,7 @@
           <div class="service-card__body">
             <h3 class="service-card__title">Radiodiagnóstico</h3>
             <p class="service-card__desc">Sala de rayos X con la última tecnología para un diagnóstico por imagen rápido y preciso.</p>
-            <a class="service-card__link" href='cita.html'>Reservar cita →</a>
+            <a class="service-card__link" onclick="showPage('cita')">Reservar cita →</a>
           </div>
         </div>
       </div>
@@ -1127,7 +1142,7 @@
           <div class="service-card__body">
             <h3 class="service-card__title">Servicios externos a domicilio</h3>
             <p class="service-card__desc">Sabemos que no siempre es fácil llegar a la clínica. Ofrecemos atención a domicilio para animales mayores, mascotas con dificultad de traslado, aquellas cuyo nivel de estrés hace preferible una atención en su propio entorno, o cuando se requiere el desplazamiento a fincas con un gran número de animales.</p>
-            <a class="service-card__link" href='cita.html'>Reservar cita →</a>
+            <a class="service-card__link" onclick="showPage('cita')">Reservar cita →</a>
           </div>
         </div>
       </div>
@@ -1238,140 +1253,12 @@
 
 
 
-  </div><!-- /page-home -->
+  
+<!-- MODAL CITA -->
+<div id="modal-cita" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(13,31,60,.85); z-index:999; overflow-y:auto; padding:40px 20px;">
+  <div style="max-width:960px; margin:0 auto; position:relative;">
+    <button onclick="cerrarCita()" style="position:absolute; top:-30px; right:0; background:none; border:none; color:#fff; font-size:1.5rem; cursor:pointer; font-family:inherit;">✕ Cerrar</button>
 
-
-<!-- ══════════════════════════════════════
-     PÁGINA CITA PREVIA
-══════════════════════════════════════ -->
-
-
-
-<script>
-  /* ── PAGE ROUTING ── */
-  function showPage(name, sectionId) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    var pg = document.getElementById('page-' + name);
-    if (pg) { pg.classList.add('active'); }
-    observeReveal();
-    if (sectionId) {
-      setTimeout(() => {
-        const el = document.getElementById(sectionId);
-        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 60);
-    } else {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  }
-
-  function scrollTo(id) {
-    setTimeout(() => {
-      const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 60);
-  }
-
-
-  /* ── TEAM PHOTO ZOOM ── */
-  document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll(".team-card__portrait").forEach(img => {
-      img.addEventListener("click", () => {
-        if (img.classList.contains("zoomed")) return;
-        img.classList.add("zoomed");
-        setTimeout(() => img.classList.remove("zoomed"), 500);
-      });
-    });
-  });
-
-  /* ── SCROLL REVEAL ── */
-  function observeReveal() {
-    const items = document.querySelectorAll('.reveal:not(.visible)');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((e, i) => {
-        if (e.isIntersecting) {
-          setTimeout(() => e.target.classList.add('visible'), i * 80);
-          observer.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.08 });
-    items.forEach(el => observer.observe(el));
-  }
-  window.addEventListener('DOMContentLoaded', observeReveal);
-
-  /* ── FORM SUBMIT → WHATSAPP ── */
-  async function enviarCita() {
-    const nombre   = document.getElementById('nombre').value.trim();
-    const mascota  = document.getElementById('mascota').value.trim();
-    const telefono = document.getElementById('telefono').value.trim();
-    const email    = document.getElementById('email').value.trim();
-    const tipo     = document.getElementById('tipo').value.trim();
-
-    if (!nombre || !mascota || !telefono) {
-      alert('Por favor, rellena al menos tu nombre, el de tu mascota y el teléfono.');
-      return;
-    }
-
-    const btn = document.querySelector('.btn-cita-submit');
-    btn.textContent = 'Enviando...';
-    btn.disabled = true;
-
-    try {
-      const res = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          access_key: '1df640a6-7992-4931-a2ed-dfcdff22c4ad',
-          subject: 'Nueva solicitud de cita previa — ' + nombre,
-          from_name: 'Web Clínica Por Ellos',
-          name: nombre,
-          NombreMascota: mascota,
-          Telefono: telefono,
-          Email: email || 'No indicado',
-          Motivo: tipo || 'No indicado'
-        })
-      });
-      const data = await res.json();
-      if (data.success) {
-        btn.textContent = '¡Solicitud enviada!';
-        btn.style.background = 'var(--sage)';
-        document.getElementById('nombre').value = '';
-        document.getElementById('mascota').value = '';
-        document.getElementById('telefono').value = '';
-        document.getElementById('email').value = '';
-        document.getElementById('tipo').value = '';
-        setTimeout(() => {
-          btn.textContent = 'Enviar solicitud';
-          btn.style.background = '';
-          btn.disabled = false;
-        }, 4000);
-      } else {
-        throw new Error('Error al enviar');
-      }
-    } catch(e) {
-      alert('Ha ocurrido un error al enviar. Por favor llámanos al 920 094 517.');
-      btn.textContent = 'Enviar solicitud';
-      btn.disabled = false;
-    }
-  }
-
-  function switchSlide(index) {
-    document.querySelectorAll('.domicilio-slide').forEach((s, i) => {
-      s.classList.toggle('active-slide', i === index);
-    });
-    document.querySelectorAll('.dot').forEach((d, i) => {
-      d.classList.toggle('active-dot', i === index);
-    });
-  }
-  // Auto-rotate cada 3 segundos
-  let slideIndex = 0;
-  setInterval(() => {
-    slideIndex = (slideIndex + 1) % 2;
-    switchSlide(slideIndex);
-  }, 3000);
-</script>
-
-
-<div id="page-cita" class="page">
 <section id="cita-section">
     <div class="cita-wrapper reveal">
 
@@ -1475,7 +1362,158 @@
 
 
 
-</div><!-- /page-cita -->
+
+  </div>
+</div>
+</div><!-- /page-home -->
+
+
+<!-- ══════════════════════════════════════
+     PÁGINA CITA PREVIA
+══════════════════════════════════════ -->
+
+
+
+<script>
+  /* ── PAGE ROUTING ── */
+  function showPage(name, sectionId) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    var pg = document.getElementById('page-' + name);
+    if (pg) { pg.classList.add('active'); }
+    observeReveal();
+    if (sectionId) {
+      setTimeout(() => {
+        const el = document.getElementById(sectionId);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 60);
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  function scrollTo(id) {
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 60);
+  }
+
+
+  /* ── TEAM PHOTO ZOOM ── */
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".team-card__portrait").forEach(img => {
+      img.addEventListener("click", () => {
+        if (img.classList.contains("zoomed")) return;
+        img.classList.add("zoomed");
+        setTimeout(() => img.classList.remove("zoomed"), 500);
+      });
+    });
+  });
+
+
+  function abrirCita() {
+    document.getElementById('modal-cita').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    window.scrollTo(0, 0);
+  }
+  function cerrarCita() {
+    document.getElementById('modal-cita').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+  // Cerrar con Escape
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') cerrarCita();
+  });
+
+  /* ── SCROLL REVEAL ── */
+  function observeReveal() {
+    const items = document.querySelectorAll('.reveal:not(.visible)');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 80);
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    items.forEach(el => observer.observe(el));
+  }
+  window.addEventListener('DOMContentLoaded', observeReveal);
+
+  /* ── FORM SUBMIT → WHATSAPP ── */
+  async function enviarCita() {
+    const nombre   = document.getElementById('nombre').value.trim();
+    const mascota  = document.getElementById('mascota').value.trim();
+    const telefono = document.getElementById('telefono').value.trim();
+    const email    = document.getElementById('email').value.trim();
+    const tipo     = document.getElementById('tipo').value.trim();
+
+    if (!nombre || !mascota || !telefono) {
+      alert('Por favor, rellena al menos tu nombre, el de tu mascota y el teléfono.');
+      return;
+    }
+
+    const btn = document.querySelector('.btn-cita-submit');
+    btn.textContent = 'Enviando...';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: '1df640a6-7992-4931-a2ed-dfcdff22c4ad',
+          subject: 'Nueva solicitud de cita previa — ' + nombre,
+          from_name: 'Web Clínica Por Ellos',
+          name: nombre,
+          NombreMascota: mascota,
+          Telefono: telefono,
+          Email: email || 'No indicado',
+          Motivo: tipo || 'No indicado'
+        })
+      });
+      const data = await res.json();
+      if (data.success) {
+        btn.textContent = '¡Solicitud enviada!';
+        btn.style.background = 'var(--sage)';
+        document.getElementById('nombre').value = '';
+        document.getElementById('mascota').value = '';
+        document.getElementById('telefono').value = '';
+        document.getElementById('email').value = '';
+        document.getElementById('tipo').value = '';
+        setTimeout(() => {
+          btn.textContent = 'Enviar solicitud';
+          btn.style.background = '';
+          btn.disabled = false;
+        }, 4000);
+      } else {
+        throw new Error('Error al enviar');
+      }
+    } catch(e) {
+      alert('Ha ocurrido un error al enviar. Por favor llámanos al 920 094 517.');
+      btn.textContent = 'Enviar solicitud';
+      btn.disabled = false;
+    }
+  }
+
+  function switchSlide(index) {
+    document.querySelectorAll('.domicilio-slide').forEach((s, i) => {
+      s.classList.toggle('active-slide', i === index);
+    });
+    document.querySelectorAll('.dot').forEach((d, i) => {
+      d.classList.toggle('active-dot', i === index);
+    });
+  }
+  // Auto-rotate cada 3 segundos
+  let slideIndex = 0;
+  setInterval(() => {
+    slideIndex = (slideIndex + 1) % 2;
+    switchSlide(slideIndex);
+  }, 3000);
+</script>
+
+
+
 
 </body>
 </html>
