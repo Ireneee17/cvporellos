@@ -462,11 +462,10 @@
     .services-grid-2 {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 2px;
-      background: var(--rule);
-      border: 1px solid var(--rule);
-      border-top: none;
-      max-width: calc(66.66% + 1px);
+      gap: 24px;
+      background: transparent;
+      border: none;
+      max-width: 100%;
     }
 
     /* ════════════════════════════════
@@ -853,7 +852,7 @@
 
     /* Tablet grande / portátil pequeño */
     @media (max-width: 1100px) {
-      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .services-grid { grid-template-columns: 1fr; }
       .team-grid { grid-template-columns: repeat(4, 1fr); gap: 20px; }
     }
 
@@ -863,7 +862,7 @@
       .hero-visual { display: none; }
       .hero-text { padding: 72px 48px; }
       .services-intro { grid-template-columns: 1fr; gap: 16px; }
-      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .services-grid { grid-template-columns: 1fr; }
       .services-grid-2 { max-width: 100%; grid-template-columns: repeat(2, 1fr); }
       .team-grid { grid-template-columns: repeat(2, 1fr); gap: 28px; }
       .cita-wrapper { grid-template-columns: 1fr; }
@@ -877,6 +876,8 @@
 
     /* Móvil grande */
     @media (max-width: 768px) {
+      .service-card { border: none; box-shadow: 0 2px 12px rgba(0,0,0,.06); border-radius: 8px; overflow: hidden; }
+
       /* Header */
       .header-inner { padding: 0 20px; height: 60px; }
       .logo-eyebrow { display: none; }
@@ -896,8 +897,8 @@
       .section { padding: 56px 20px; }
       .section-title { font-size: 1.8rem; margin-bottom: 32px; }
       .services-intro p { display: none; }
-      .services-grid { grid-template-columns: 1fr; gap: 2px; }
-      .services-grid-2 { grid-template-columns: 1fr; border-top: 2px solid var(--rule); }
+      .services-grid { grid-template-columns: 1fr !important; gap: 20px; }
+      .services-grid-2 { grid-template-columns: 1fr !important; gap: 20px; border-top: none; }
       .service-card__img { height: 220px; }
       .service-card__body { padding: 22px 20px 26px; }
 
@@ -1169,7 +1170,7 @@
           <div class="service-card__body">
             <span class="service-card__tag">Diagnóstico</span>
             <h3 class="service-card__title">Laboratorio</h3>
-            <p class="service-card__desc">Análisis clínicos completos — hemograma, bioquímica, sedimento urinario y diagnóstico avanzado con la Vetscan Imagyst — con resultados en el mismo día. Contamos además con laboratorios externos de referencia para pruebas especializadas.</p>
+            <p class="service-card__desc">Análisis clínicos: analíticas sanguíneas básicas y especializadas, test SNAP de diagnóstico rápido, sedimento urinario y diagnóstico avanzado con la Vetscan Imagyst — coprología, citologías, frotis y punción de masas — con resultados en el mismo día. Contamos además con laboratorios externos de referencia para pruebas especializadas.</p>
           </div>
         </div>
         <div class="service-card">
