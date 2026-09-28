@@ -1014,12 +1014,20 @@
     .dot.active-dot { background: #fff; }
   
   #cita-section { display: flex !important; }
+
+    a[href^="tel"], a[href^="mailto"], a[href^="https://wa"] {
+      color: rgba(250,250,248,.65) !important;
+      text-decoration: none !important;
+    }
+    .cita-contact-list a, .cita-contact-list li {
+      color: rgba(250,250,248,.65) !important;
+    }
   </style>
 </head>
 <body>
 <header>
   <div class="header-inner">
-    <div class="logo-wrap" href='index.html' style='text-decoration:none;'>
+    <a class="logo-wrap" href='index.html' style='text-decoration:none;'>
       <span class="logo-eyebrow">Clínica Veterinaria</span>
       <span class="logo-name">Por Ellos</span>
     </a>
