@@ -1065,6 +1065,75 @@
     .logo-eyebrow, .footer-logo-sub {
       font-family: var(--ff-body);
     }
+
+    /* ── COOKIE BANNER ── */
+    .cookie-banner {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
+      background: var(--ink); color: #fff;
+      padding: 1.2rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.2);
+      transform: translateY(100%);
+      transition: transform .4s ease;
+      font-family: var(--ff-body);
+    }
+    .cookie-banner.visible { transform: translateY(0); }
+    .cookie-banner p { font-size: .85rem; color: rgba(255,255,255,.8); max-width: 680px; line-height: 1.5; margin:0; }
+    .cookie-banner p a { color: var(--gold); text-decoration: underline; cursor: pointer; }
+    .cookie-btns { display: flex; gap: .8rem; flex-shrink: 0; }
+    .cookie-aceptar {
+      background: var(--gold); color: var(--ink);
+      padding: .6rem 1.3rem; border-radius: 4px; border: none;
+      font-size: .82rem; font-weight: 600; cursor: pointer; font-family: var(--ff-body);
+      letter-spacing: .08em; text-transform: uppercase;
+      transition: background .2s;
+    }
+    .cookie-aceptar:hover { background: #d4b57a; }
+    .cookie-rechazar {
+      background: transparent; color: rgba(255,255,255,.6);
+      padding: .6rem 1.3rem; border-radius: 4px;
+      border: 1px solid rgba(255,255,255,.2);
+      font-size: .82rem; cursor: pointer; font-family: var(--ff-body);
+      letter-spacing: .08em; text-transform: uppercase;
+      transition: all .2s;
+    }
+    .cookie-rechazar:hover { border-color: rgba(255,255,255,.5); color: #fff; }
+
+    /* ── MODAL LEGAL ── */
+    .modal-legal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 10000;
+      background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
+      align-items: center; justify-content: center; padding: 1.5rem;
+    }
+    .modal-legal-overlay.open { display: flex; }
+    .modal-legal {
+      background: var(--white); border-radius: 8px;
+      width: 100%; max-width: 700px; max-height: 85vh;
+      overflow-y: auto; padding: 2.5rem;
+      position: relative;
+    }
+    .modal-legal-close {
+      position: absolute; top: 1.2rem; right: 1.2rem;
+      background: var(--sage-lt); border: none; cursor: pointer;
+      width: 32px; height: 32px; border-radius: 50%;
+      font-size: 1rem; display: flex; align-items: center; justify-content: center;
+      color: var(--ink);
+    }
+    .modal-legal h2 {
+      font-family: var(--ff-head); font-size: 1.8rem; font-weight: 500;
+      color: var(--ink); margin-bottom: 1.5rem;
+    }
+    .modal-legal h3 {
+      font-family: var(--ff-body); font-size: .9rem; font-weight: 600;
+      color: var(--ink); margin: 1.5rem 0 .5rem; letter-spacing: .05em;
+    }
+    .modal-legal p, .modal-legal li {
+      font-family: var(--ff-head); font-size: 1rem;
+      color: var(--stone); line-height: 1.7; margin-bottom: .5rem;
+    }
+    .modal-legal ul { padding-left: 1.2rem; }
+    .modal-legal a { color: var(--gold); }
   </style>
 </head>
 <body>
@@ -1293,7 +1362,8 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2025 Por Ellos. Todos los derechos reservados. · <a href="privacidad.html" style="color:inherit; text-decoration:underline;">Política de privacidad</a></p>
+      <p>© 2025 Por Ellos. Todos los derechos reservados.</p>
+      <p style="margin-top:8px; display:flex; gap:16px; justify-content:center; flex-wrap:wrap;"><a href="#" onclick="abrirLegal('aviso'); return false;" style="color:inherit; text-decoration:underline;">Aviso legal</a><a href="#" onclick="abrirLegal('privacidad'); return false;" style="color:inherit; text-decoration:underline;">Política de privacidad</a><a href="#" onclick="abrirLegal('cookies'); return false;" style="color:inherit; text-decoration:underline;">Política de cookies</a></p>
     </div>
   </footer>
 
@@ -1402,7 +1472,8 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2025 Por Ellos. Todos los derechos reservados. · <a href="privacidad.html" style="color:inherit; text-decoration:underline;">Política de privacidad</a></p>
+      <p>© 2025 Por Ellos. Todos los derechos reservados.</p>
+      <p style="margin-top:8px; display:flex; gap:16px; justify-content:center; flex-wrap:wrap;"><a href="#" onclick="abrirLegal('aviso'); return false;" style="color:inherit; text-decoration:underline;">Aviso legal</a><a href="#" onclick="abrirLegal('privacidad'); return false;" style="color:inherit; text-decoration:underline;">Política de privacidad</a><a href="#" onclick="abrirLegal('cookies'); return false;" style="color:inherit; text-decoration:underline;">Política de cookies</a></p>
     </div>
   </footer>
 
@@ -1562,50 +1633,118 @@
 
 
 
+
 <!-- COOKIE BANNER -->
-<div id="cookie-banner" style="
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: var(--ink);
-  color: rgba(250,250,248,.8);
-  padding: 16px 32px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  z-index: 9999;
-  font-family: var(--ff-body);
-  font-size: .82rem;
-  flex-wrap: wrap;
-">
-  <span>Esta web usa cookies de Google Maps para mostrar nuestra ubicación. <a href="privacidad.html" style="color:var(--gold); text-decoration:underline;">Más información</a></span>
-  <button onclick="aceptarCookies()" style="
-    background: var(--gold);
-    color: var(--ink);
-    border: none;
-    padding: 8px 24px;
-    font-family: var(--ff-body);
-    font-size: .78rem;
-    font-weight: 500;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    cursor: pointer;
-    border-radius: 2px;
-    white-space: nowrap;
-  ">Aceptar</button>
+<div class="cookie-banner" id="cookie-banner">
+  <p>Utilizamos cookies técnicas necesarias para el funcionamiento de la web. Consulta nuestra <a onclick="abrirLegal('cookies')">política de cookies</a> y <a onclick="abrirLegal('privacidad')">política de privacidad</a>.</p>
+  <div class="cookie-btns">
+    <button class="cookie-rechazar" onclick="cerrarCookies()">Rechazar</button>
+    <button class="cookie-aceptar" onclick="aceptarCookies()">Aceptar</button>
+  </div>
+</div>
+
+<!-- MODAL LEGAL -->
+<div class="modal-legal-overlay" id="modal-legal">
+  <div class="modal-legal">
+    <button class="modal-legal-close" onclick="cerrarLegal()">✕</button>
+
+    <div id="legal-aviso">
+      <h2>Aviso Legal</h2>
+      <h3>1. Datos identificativos del titular</h3>
+      <p>En cumplimiento de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y Comercio Electrónico (LSSI-CE), se informa:</p>
+      <ul>
+        <li><strong>Titular:</strong> Clínica Veterinaria Por Ellos</li>
+        <li><strong>NIF:</strong> 04862961W</li>
+        <li><strong>Domicilio:</strong> C. José Zorrilla, nº2, 05400 Arenas de San Pedro, Ávila</li>
+        <li><strong>Teléfono:</strong> +34 920 094 517</li>
+        <li><strong>Email:</strong> citascvporellos@gmail.com</li>
+        <li><strong>Web:</strong> cvporellos.com</li>
+      </ul>
+      <h3>2. Objeto y ámbito de aplicación</h3>
+      <p>El presente aviso legal regula el acceso y uso del sitio web cvporellos.com. El acceso al sitio web implica la aceptación plena de las condiciones aquí establecidas.</p>
+      <h3>3. Propiedad intelectual</h3>
+      <p>Los contenidos de este sitio web (textos, imágenes, logotipos y diseño) son propiedad de Clínica Veterinaria Por Ellos y están protegidos por la legislación vigente. Queda prohibida su reproducción sin autorización expresa.</p>
+      <h3>4. Responsabilidad</h3>
+      <p>La clínica no se responsabiliza de los daños derivados del uso de la web ni de la información contenida en enlaces externos. Los contenidos son meramente informativos y no sustituyen el consejo veterinario profesional.</p>
+      <h3>5. Legislación aplicable</h3>
+      <p>Las presentes condiciones se rigen por la legislación española vigente.</p>
+    </div>
+
+    <div id="legal-privacidad" style="display:none">
+      <h2>Política de Privacidad</h2>
+      <h3>1. Responsable del tratamiento</h3>
+      <ul>
+        <li><strong>Titular:</strong> Clínica Veterinaria Por Ellos</li>
+        <li><strong>NIF:</strong> 04862961W</li>
+        <li><strong>Email:</strong> citascvporellos@gmail.com</li>
+        <li><strong>Dirección:</strong> C. José Zorrilla, nº2, 05400 Arenas de San Pedro, Ávila</li>
+      </ul>
+      <h3>2. Datos que recabamos</h3>
+      <p>A través del formulario de solicitud de cita recogemos nombre, nombre de la mascota, teléfono, email, fecha preferida y motivo de la consulta.</p>
+      <h3>3. Finalidad del tratamiento</h3>
+      <p>Los datos facilitados se utilizan exclusivamente para gestionar tu solicitud de cita y ponernos en contacto contigo. No se ceden a terceros ni se utilizan con fines comerciales.</p>
+      <h3>4. Legitimación</h3>
+      <p>La base legal del tratamiento es el consentimiento del interesado al rellenar el formulario de cita.</p>
+      <h3>5. Conservación de datos</h3>
+      <p>Los datos se conservan durante el tiempo necesario para gestionar la cita y, posteriormente, durante los plazos legalmente establecidos.</p>
+      <h3>6. Derechos del usuario</h3>
+      <p>Puede ejercer sus derechos de acceso, rectificación, supresión, oposición y portabilidad enviando un email a citascvporellos@gmail.com.</p>
+      <h3>7. Reclamaciones</h3>
+      <p>Si considera que sus derechos no han sido atendidos correctamente, puede presentar una reclamación ante la Agencia Española de Protección de Datos (aepd.es).</p>
+    </div>
+
+    <div id="legal-cookies" style="display:none">
+      <h2>Política de Cookies</h2>
+      <h3>¿Qué son las cookies?</h3>
+      <p>Las cookies son pequeños archivos que se almacenan en el dispositivo del usuario al visitar una página web.</p>
+      <h3>Cookies que utilizamos</h3>
+      <p>Este sitio web utiliza cookies técnicas propias necesarias para el funcionamiento de la web, y cookies de Google Maps para mostrar la ubicación de la clínica.</p>
+      <ul>
+        <li><strong>Cookie de preferencias:</strong> Recuerda si el usuario ha aceptado el aviso de cookies.</li>
+        <li><strong>Google Maps:</strong> Cookies de terceros para mostrar el mapa de ubicación. Más info en <a href="https://policies.google.com/privacy" target="_blank">policies.google.com</a>.</li>
+      </ul>
+      <h3>¿Cómo desactivar las cookies?</h3>
+      <p>Puede configurar su navegador para bloquear o eliminar las cookies. Tenga en cuenta que esto puede afectar al funcionamiento del mapa de ubicación.</p>
+      <h3>Más información</h3>
+      <p>Para cualquier consulta sobre el uso de cookies puede contactarnos en citascvporellos@gmail.com.</p>
+    </div>
+  </div>
 </div>
 
 <script>
-  // Cookie banner
-  if (localStorage.getItem('cookies-aceptadas')) {
-    document.getElementById('cookie-banner').style.display = 'none';
-  }
+  // COOKIES
   function aceptarCookies() {
-    localStorage.setItem('cookies-aceptadas', 'si');
-    document.getElementById('cookie-banner').style.display = 'none';
+    try { localStorage.setItem('cookies_cvporellos', 'aceptado'); } catch(e) {}
+    document.getElementById('cookie-banner').classList.remove('visible');
   }
+  function cerrarCookies() {
+    try { localStorage.setItem('cookies_cvporellos', 'rechazado'); } catch(e) {}
+    document.getElementById('cookie-banner').classList.remove('visible');
+  }
+  window.addEventListener('load', function() {
+    let consent = null;
+    try { consent = localStorage.getItem('cookies_cvporellos'); } catch(e) {}
+    if (!consent) {
+      setTimeout(() => document.getElementById('cookie-banner').classList.add('visible'), 800);
+    }
+  });
+
+  // MODAL LEGAL
+  function abrirLegal(seccion) {
+    document.getElementById('legal-aviso').style.display = 'none';
+    document.getElementById('legal-privacidad').style.display = 'none';
+    document.getElementById('legal-cookies').style.display = 'none';
+    document.getElementById('legal-' + seccion).style.display = 'block';
+    document.getElementById('modal-legal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function cerrarLegal() {
+    document.getElementById('modal-legal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('modal-legal').addEventListener('click', function(e) {
+    if (e.target === this) cerrarLegal();
+  });
 </script>
 </body>
 </html>
