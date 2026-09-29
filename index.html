@@ -851,18 +851,19 @@
     /* ── RESPONSIVE ── */
 
     /* Tablet grande / portátil pequeño */
+    /* ── TABLET GRANDE ── */
     @media (max-width: 1100px) {
-      .services-grid { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
       .team-grid { grid-template-columns: repeat(4, 1fr); gap: 20px; }
     }
 
-    /* Tablet */
+    /* ── TABLET ── */
     @media (max-width: 1024px) {
       #inicio { grid-template-columns: 1fr; min-height: auto; }
       .hero-visual { display: none; }
       .hero-text { padding: 72px 48px; }
       .services-intro { grid-template-columns: 1fr; gap: 16px; }
-      .services-grid { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
       .services-grid-2 { max-width: 100%; grid-template-columns: repeat(2, 1fr); }
       .team-grid { grid-template-columns: repeat(2, 1fr); gap: 28px; }
       .cita-wrapper { grid-template-columns: 1fr; }
@@ -874,61 +875,72 @@
       .junta-logos { justify-content: flex-start; }
     }
 
-    /* Móvil grande */
+    /* ── MÓVIL GRANDE (≤768px) ── */
     @media (max-width: 768px) {
-      .service-card { border: none; box-shadow: 0 2px 12px rgba(0,0,0,.06); border-radius: 8px; overflow: hidden; margin-bottom: 0; }
+      /* Tarjetas */
+      .service-card { border: none; box-shadow: 0 2px 16px rgba(0,0,0,.07); border-radius: 10px; overflow: hidden; }
 
       /* Header */
       .header-inner { padding: 0 20px; height: 60px; }
-      .logo-eyebrow { display: none; }
-      .logo-name { font-size: 1rem; }
+      .logo-eyebrow { display: block; font-size: 8px; letter-spacing: .15em; }
+      .logo-name { font-size: 1.05rem; }
       nav { gap: 14px; }
-      nav a.nav-link { font-size: .72rem; letter-spacing: .05em; }
+      nav a.nav-link { font-size: .74rem; letter-spacing: .05em; }
       .nav-divider { display: none; }
 
       /* Hero */
       .hero-text { padding: 52px 24px 60px; }
-      .hero-title { font-size: 2rem; }
-      .hero-body { font-size: .92rem; margin-bottom: 32px; }
+      .hero-title { font-size: 2.2rem; line-height: 1.1; }
+      .hero-eyebrow { font-size: .72rem; }
+      .hero-body { font-size: 1.15rem; line-height: 1.75; margin-bottom: 32px; }
       .hero-actions { flex-direction: column; gap: 14px; }
-      .hero-actions a { text-align: center; justify-content: center; width: 100%; padding: 18px 24px; font-size: .9rem; }
+      .hero-actions a { text-align: center; justify-content: center; width: 100%; padding: 18px 24px; font-size: .95rem; }
 
       /* Secciones */
-      .section { padding: 40px 16px; }
+      .section { padding: 48px 20px; }
       #servicios { background: var(--white); }
-      .section-title { font-size: 1.8rem; margin-bottom: 32px; }
+      .section-title { font-size: 2rem; margin-bottom: 32px; }
       .services-intro p { display: none; }
-      .services-grid { grid-template-columns: 1fr !important; gap: 16px; background: var(--white); }
-      .services-grid-2 { grid-template-columns: 1fr !important; gap: 20px; border-top: none; }
-      .service-card__img { height: 220px; }
-      .service-card__body { padding: 22px 20px 26px; }
+      .services-grid { grid-template-columns: 1fr !important; gap: 20px; background: transparent; }
+      .services-grid-2 { grid-template-columns: 1fr !important; gap: 20px; border-top: none; background: transparent; }
+      .service-card__img { height: 230px; }
+      .service-card__body { padding: 24px 22px 28px; }
+      .service-card__title { font-size: 1.6rem; }
+      .service-card__desc { font-size: 1.1rem; line-height: 1.7; }
+      .service-card__tag { font-size: .78rem; }
+      .service-card__link { font-size: .8rem; }
 
       /* Equipo */
-      .team-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
-      .team-card__portrait { margin-bottom: 14px; }
+      .team-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+      .team-card__name { font-size: 1.2rem; }
+      .team-card__role { font-size: 1rem; }
 
       /* Junta */
       .junta-inner { padding: 44px 20px; gap: 28px; }
-      .junta-text h2 { font-size: 1.4rem; }
-      .junta-logos { gap: 16px; flex-wrap: wrap; }
-      .junta-logos img { height: 72px; }
+      .junta-text h2 { font-size: 1.5rem; }
+      .junta-text p { font-size: 1rem; }
+      .junta-meta { font-size: .95rem; }
+      .junta-logos { gap: 16px; flex-wrap: wrap; justify-content: center; }
+      .junta-logos img { height: 80px; }
       .junta-logos-divider { height: 40px; }
 
       /* Footer */
       .footer-contact { padding: 44px 24px; }
       .footer-map iframe { min-height: 240px; }
-      .footer-bottom { flex-direction: column; gap: 6px; text-align: center; padding: 18px 20px; }
+      .footer-bottom { flex-direction: column; gap: 8px; text-align: center; padding: 18px 20px; }
+      .footer-contact-item a, .footer-contact-item span { font-size: .95rem; }
 
       /* Cita */
       #cita-section { padding: 40px 16px; }
       .cita-info { padding: 36px 28px; }
-      .cita-info__top h2 { font-size: 1.6rem; }
+      .cita-info__top h2 { font-size: 1.7rem; }
+      .cita-info__top p { font-size: 1rem; }
       .cita-form-side { padding: 36px 28px; }
       .form-row { grid-template-columns: 1fr; gap: 0; }
-      .btn-cita-submit { font-size: .75rem; }
+      .btn-cita-submit { font-size: .85rem; padding: 16px; }
     }
 
-    /* Móvil pequeño */
+    /* ── MÓVIL PEQUEÑO (≤480px) ── */
     @media (max-width: 480px) {
       /* Header */
       .header-inner { padding: 0 14px; }
@@ -939,27 +951,26 @@
 
       /* Hero */
       .hero-text { padding: 44px 18px 52px; }
-      .hero-title { font-size: 1.7rem; line-height: 1.12; }
-      .hero-eyebrow { font-size: .68rem; }
-      .btn-primary, .btn-outline { font-size: .85rem; padding: 16px 20px; }
+      .hero-title { font-size: 1.9rem; line-height: 1.12; }
+      .hero-body { font-size: 1.05rem; }
+      .btn-primary, .btn-outline { font-size: .88rem; padding: 16px 20px; }
 
       /* Servicios */
-      .service-card__title { font-size: 1.2rem; }
-      .service-card__desc { font-size: .84rem; }
+      .service-card__title { font-size: 1.4rem; }
+      .service-card__desc { font-size: 1rem; line-height: 1.65; }
 
       /* Equipo */
-      .team-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
-      .team-card__name { font-size: .95rem; }
-      .team-card__role { font-size: .7rem; }
+      .team-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .team-card__name { font-size: 1.05rem; }
+      .team-card__role { font-size: .9rem; }
 
       /* Junta */
-      .junta-logos img { height: 56px; }
+      .junta-logos img { height: 64px; }
       .junta-logos-divider { display: none; }
 
       /* Footer */
-      .footer-logo { font-size: 1.2rem; }
-      .footer-contact-item a,
-      .footer-contact-item span { font-size: .82rem; }
+      .footer-logo { font-size: 1.3rem; }
+      .footer-contact-item a, .footer-contact-item span { font-size: .88rem; }
 
       /* Cita */
       .cita-info { padding: 28px 20px; }
@@ -967,31 +978,17 @@
       .cita-info__top h2 { font-size: 1.4rem; }
     }
 
-    /* Móvil muy pequeño */
+    /* ── MÓVIL MUY PEQUEÑO (≤360px) ── */
     @media (max-width: 360px) {
       .header-inner { padding: 0 10px; }
       .logo-name { font-size: .85rem; }
       nav a.nav-link { font-size: .62rem; }
-      .hero-title { font-size: 1.5rem; }
+      .hero-title { font-size: 1.6rem; }
+      .hero-body { font-size: 1rem; }
       .team-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
     }
 
-  
-  function abrirCita() {
-    document.getElementById('modal-cita').style.display = 'block';
-    document.body.style.overflow = 'hidden';
-    window.scrollTo(0, 0);
-  }
-  function cerrarCita() {
-    document.getElementById('modal-cita').style.display = 'none';
-    document.body.style.overflow = '';
-  }
-  // Cerrar con Escape
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') cerrarCita();
-  });
-
-  /* ── SCROLL REVEAL ── */
+    /* ── SCROLL REVEAL ── */
     .reveal {
       opacity: 0;
       transform: translateY(24px);
